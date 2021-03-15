@@ -1,0 +1,7 @@
+Makefile
+game_main
+CMakeCache*
+cmake_install*
+CMakeFiles
+.vscode
+
