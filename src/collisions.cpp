@@ -3,6 +3,12 @@
 namespace cb::Collisions
 {
     std::map<EntityTypes, std::map<EntityTypes, cb::Collisions::CollisionFunction>> collisions;
+
+    template<typename T, typename U>
+    bool UnpossiblePair(T one, U two)
+    {
+        return false;
+    }
 }
 
 /** \brief Check whether a player object has collided with a block object.
@@ -22,16 +28,6 @@ bool cb::Collisions::Player_Block(cb::Entities::Entity* player, cb::Entities::En
 bool cb::Collisions::Block_Player(cb::Entities::Entity* block, cb::Entities::Entity* player)
 {
     return cb::Collisions::Player_Block(player, block);
-}
-
-bool cb::Collisions::Block_Block(cb::Entities::Entity* block1, cb::Entities::Entity* block2)
-{
-    return false;
-}
-
-bool cb::Collisions::Player_Player(cb::Entities::Entity* block1, cb::Entities::Entity* block2)
-{
-    return false;
 }
 
 bool cb::Collisions::Player_Projectile(cb::Entities::Entity* player, cb::Entities::Entity* projectile)
@@ -67,20 +63,20 @@ void cb::Collisions::initCollisionMap()
 {
     collisions[BlockType][PlayerType] = cb::Collisions::Block_Player;
     collisions[PlayerType][BlockType] = cb::Collisions::Player_Block;
-    collisions[BlockType][BlockType] = cb::Collisions::Block_Block;
-    collisions[PlayerType][PlayerType] = cb::Collisions::Player_Player;
+    collisions[BlockType][BlockType] = cb::Collisions::UnpossiblePair;
+    collisions[PlayerType][PlayerType] = cb::Collisions::UnpossiblePair;
     collisions[PlayerType][ProjectileType] = cb::Collisions::Player_Projectile;
     collisions[ProjectileType][PlayerType] = cb::Collisions::Projectile_Player;
     collisions[BlockType][ProjectileType] = cb::Collisions::Block_Projectile;
     collisions[ProjectileType][BlockType] = cb::Collisions::Projectile_Block;
     collisions[ProjectileType][ProjectileType] = cb::Collisions::Projectile_Projectile;
     collisions[PlatformType][PlayerType] = cb::Collisions::Platform_Player;
-    collisions[PlatformType][BlockType] = cb::Collisions::Platform_Block;
+    collisions[PlatformType][BlockType] = cb::Collisions::UnpossiblePair;
     collisions[PlatformType][ProjectileType] = cb::Collisions::Platform_Projectile;
     collisions[PlayerType][PlatformType] = cb::Collisions::Player_Platform;
-    collisions[BlockType][PlatformType] = cb::Collisions::Block_Platform;
+    collisions[BlockType][PlatformType] = cb::Collisions::UnpossiblePair;
     collisions[ProjectileType][PlatformType] = cb::Collisions::Projectile_Platform;
-    collisions[PlatformType][PlatformType] = cb::Collisions::Platform_Platform;
+    collisions[PlatformType][PlatformType] = cb::Collisions::UnpossiblePair;
 }
 
 bool cb::Collisions::Platform_Player(cb::Entities::Entity* platform, cb::Entities::Entity* player)
@@ -88,11 +84,6 @@ bool cb::Collisions::Platform_Player(cb::Entities::Entity* platform, cb::Entitie
 // todo
     return false;
 
-}
-
-bool cb::Collisions::Platform_Block(cb::Entities::Entity* platform, cb::Entities::Entity* block)
-{
-    return false;
 }
 
 bool cb::Collisions::Platform_Projectile(cb::Entities::Entity* platform, cb::Entities::Entity* projectile)
@@ -109,21 +100,11 @@ bool cb::Collisions::Player_Platform(cb::Entities::Entity* player, cb::Entities:
 
 }
 
-bool cb::Collisions::Block_Platform(cb::Entities::Entity* block, cb::Entities::Entity* platform)
-{
-    return false;
-}
-
 bool cb::Collisions::Projectile_Platform(cb::Entities::Entity* projectile, cb::Entities::Entity* platform)
 {
     // todo
         return false;
 
-}
-
-bool cb::Collisions::Platform_Platform(cb::Entities::Entity* platform1, cb::Entities::Entity* platform2)
-{
-    return false;
 }
 
 bool cb::Collisions::circleCircleInterset(cb::Entities::Entity* ent1, cb::Entities::Entity* ent2)
