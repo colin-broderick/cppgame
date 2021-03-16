@@ -34,7 +34,7 @@ void cb::Game::initScenery()
 {
     auto &scene = m_gameObjects;
 
-    scene.push_back(new cb::Entities::Player{100, 100, 0, 0});
+    scene.push_back(new cb::Entities::Player{600, 100, 0, 0});
     scene.push_back(new cb::Entities::Block{-10, 1000, 1940, 100});   // floor
     scene.push_back(new cb::Entities::Block{-10, -200, 1940, 100});   // ceiling
     scene.push_back(new cb::Entities::Block{-10, -200, 100, 1300});   // left wall
@@ -144,7 +144,7 @@ void cb::Game::detectCollisions()
 void cb::Game::updateText()
 {
     std::stringstream ss;
-    ss << "Score:  " << m_points << "\nHealth: " << m_health;
+    ss << "Score:  " << m_points << "\nHealth: " << PLAYER->getHealth();
     m_uiText.setString(ss.str());
 }
 

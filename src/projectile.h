@@ -29,11 +29,14 @@ namespace cb::Entities
             float getY() const;
             float getDx() const;
             float getDy() const;
+            bool requestsDeletion() const;
+
 
         private:
             // Properties
             float x, y, dx, dy, radius, mass, lastX, lastY;
             int zIndex;
+            bool deleteFromScene;
 
             // Graphics
             sf::CircleShape representation;

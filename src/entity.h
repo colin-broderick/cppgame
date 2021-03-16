@@ -37,8 +37,7 @@ namespace cb::Entities
             virtual float getDx() const;
             virtual float getDy() const;
             virtual bool requestsDeletion() const;
-
-
+            virtual void reduceHealth(int pain);
     };
 }
 

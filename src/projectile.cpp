@@ -2,6 +2,8 @@
 
 #include "projectile.h"
 
+// Constructors ===================================================================================
+
 cb::Entities::Projectile::Projectile(float x, float y, float dx, float dy)
 {
     this->x = x;
@@ -11,12 +13,15 @@ cb::Entities::Projectile::Projectile(float x, float y, float dx, float dy)
     this->radius = 3;
     this->mass = 1;
     this->zIndex = 0;
+    this->deleteFromScene = false;
 
     representation.setOrigin(radius, radius);
     representation.setPosition(sf::Vector2f{x, y});
     representation.setRadius(this->radius);
     representation.setFillColor(sf::Color::Yellow);
 }
+
+// Game loop ======================================================================================
 
 void cb::Entities::Projectile::draw(sf::RenderTarget &target, const cb::Entities::Camera &camera)
 {
@@ -32,6 +37,8 @@ void cb::Entities::Projectile::update(float dt)
     x = x + dx * dt;
     y = y + dy * dt;
 }
+
+// Collision managers =============================================================================
 
 void cb::Entities::Projectile::collide(const cb::Entities::Entity* entity)
 {
@@ -53,7 +60,7 @@ void cb::Entities::Projectile::collide(const cb::Entities::Entity* entity)
 
 void cb::Entities::Projectile::collidePlayer(const cb::Entities::Entity* player)
 {
-
+    this->deleteFromScene = true;
 }
 
 void cb::Entities::Projectile::collideBlock(const cb::Entities::Entity* block)
@@ -91,6 +98,8 @@ void cb::Entities::Projectile::collideProjectile(const cb::Entities::Entity* pro
     }
 }
 
+// Getters ========================================================================================
+
 EntityTypes cb::Entities::Projectile::getType() const
 {
     return ProjectileType;
@@ -119,4 +128,9 @@ float cb::Entities::Projectile::getDx() const
 float cb::Entities::Projectile::getDy() const
 {
     return dy;
+}
+
+bool cb::Entities::Projectile::requestsDeletion() const
+{
+    return deleteFromScene;
 }

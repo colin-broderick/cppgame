@@ -55,7 +55,7 @@ bool cb::Collisions::Block_Player(cb::Entities::Entity* block, cb::Entities::Ent
 
 bool cb::Collisions::Player_Projectile(cb::Entities::Entity* player, cb::Entities::Entity* projectile)
 {
-    return false;
+    return rectangleCircleIntersect(player, projectile);
 }
 
 bool cb::Collisions::Projectile_Player(cb::Entities::Entity* projectile, cb::Entities::Entity* player)

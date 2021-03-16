@@ -234,6 +234,9 @@ void cb::Entities::Player::collide(const cb::Entities::Entity* entity)
         case BlockType:
             collideBlock(entity);
             break;
+        case ProjectileType:
+            collideProjectile(entity);
+            break;
         default:
             break;
     }
@@ -291,7 +294,19 @@ float cb::Entities::Player::getVerticalCameraFactor() const
     return verticalCameraFactor;
 }
 
+int cb::Entities::Player::getHealth() const
+{
+    return health;
+}
+
 EntityTypes cb::Entities::Player::getType() const
 {
     return PlayerType;
+}
+
+// Setters ========================================================================================
+
+void cb::Entities::Player::reduceHealth(int pain)
+{
+    health -= pain;
 }

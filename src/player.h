@@ -47,7 +47,11 @@ namespace cb::Entities
             float getHeight() const;
             float getFacing() const;
             float getVerticalCameraFactor() const;
+            int getHealth() const;
             EntityTypes getType() const;
+
+            // Setters
+            void reduceHealth(int pain);
 
         private:
             // Graphics

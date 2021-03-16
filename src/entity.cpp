@@ -71,3 +71,7 @@ bool cb::Entities::Entity::requestsDeletion() const
     // std::cout << "Did you mean to call Entity::requestsDeletion?" << std::endl;
     return false;
 }
+void cb::Entities::Entity::reduceHealth(int pain)
+{
+    std::cout << "Did you mean to call Entity::reduceHealth?" << std::endl;
+}
