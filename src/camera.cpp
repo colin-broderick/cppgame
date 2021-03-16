@@ -8,7 +8,8 @@
  * \param x Starting x position of the camera.
  * \param y Starting y position of the camera.
  */
-cb::Entities::Camera::Camera(float x, float y, float minimumX, float maximumX, float minimumY, float maximumY)
+cb::Entities::Camera::Camera(float x, float y, float minimumX, float maximumX,
+                                               float minimumY, float maximumY)
 {
     this->x = x;
     this->y = y;

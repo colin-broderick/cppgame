@@ -83,14 +83,18 @@ void cb::Entities::Projectile::collideProjectile(const cb::Entities::Entity* pro
         projectile->getX() - x,
         projectile->getY() - y
     };
-    float distance = sqrt((projectile->getX()-x)*(projectile->getX()-x) + (projectile->getY()-y)*(projectile->getY()-y));
+    float distance = sqrt(
+          (projectile->getX()-x)*(projectile->getX()-x)
+        + (projectile->getY()-y)*(projectile->getY()-y)
+    );
     sf::Vector2f collisionVectorNorm = collisionVector/distance;
     sf::Vector2f relativeVelocityVector{
         dx - projectile->getDx(),
         dy - projectile->getDy()
     };
-    float speed = relativeVelocityVector.x*collisionVectorNorm.x + relativeVelocityVector.y*collisionVectorNorm.y;
-    float impulse = speed;  // TODO Calculate impulse here.
+    float speed = relativeVelocityVector.x*collisionVectorNorm.x
+                + relativeVelocityVector.y*collisionVectorNorm.y;
+    // TODO Calculate impulse here.
     if (speed > 0)    
     {
         dx -= speed*collisionVectorNorm.x;

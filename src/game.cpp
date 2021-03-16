@@ -44,7 +44,7 @@ void cb::Game::initScenery()
 
     scene.push_back(new cb::Entities::Platform{400, 400, 400, 400});
 
-    for (int i = 0; i < 400; i++)
+    for (int i = 0; i < 100; i++)
     {
         scene.push_back(new cb::Entities::Projectile{120, 120, 200+(float)rand()/RAND_MAX*50, 118+(float)rand()/RAND_MAX*50});
     }

@@ -9,7 +9,8 @@ namespace cb::Entities
     {
         public:
             // Constructors
-            Camera(float x, float y, float minimumX, float maximumX, float minimumY, float maximumY);
+            Camera(float x, float y, float minimumX, float maximumX,
+                                     float minimumY, float maximumY);
 
             // Getters
             float getX() const;

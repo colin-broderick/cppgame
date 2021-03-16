@@ -43,60 +43,71 @@ void cb::Collisions::initCollisionMap()
  * \param block Pointer to Block/Entity.
  * \return True if colliding, false otherwise.
  */
-bool cb::Collisions::Player_Block(cb::Entities::Entity* player, cb::Entities::Entity* block)
+bool cb::Collisions::Player_Block(cb::Entities::Entity* player,
+                                  cb::Entities::Entity* block)
 {
     return rectangleRectangleIntersect(player, block);
 }
 
-bool cb::Collisions::Block_Player(cb::Entities::Entity* block, cb::Entities::Entity* player)
+bool cb::Collisions::Block_Player(cb::Entities::Entity* block,
+                                  cb::Entities::Entity* player)
 {
     return cb::Collisions::Player_Block(player, block);
 }
 
-bool cb::Collisions::Player_Projectile(cb::Entities::Entity* player, cb::Entities::Entity* projectile)
+bool cb::Collisions::Player_Projectile(cb::Entities::Entity* player,
+                                       cb::Entities::Entity* projectile)
 {
     return rectangleCircleIntersect(player, projectile);
 }
 
-bool cb::Collisions::Projectile_Player(cb::Entities::Entity* projectile, cb::Entities::Entity* player)
+bool cb::Collisions::Projectile_Player(cb::Entities::Entity* projectile,
+                                       cb::Entities::Entity* player)
 {
     return Player_Projectile(player, projectile);
 }
 
-bool cb::Collisions::Block_Projectile(cb::Entities::Entity* block, cb::Entities::Entity* projectile)
+bool cb::Collisions::Block_Projectile(cb::Entities::Entity* block,
+                                      cb::Entities::Entity* projectile)
 {
     return rectangleCircleIntersect(block, projectile);
 }
 
-bool cb::Collisions::Projectile_Block(cb::Entities::Entity* projectile, cb::Entities::Entity* block)
+bool cb::Collisions::Projectile_Block(cb::Entities::Entity* projectile,
+                                      cb::Entities::Entity* block)
 {
     return Block_Projectile(block, projectile);
 }
 
-bool cb::Collisions::Projectile_Projectile(cb::Entities::Entity* projectile1, cb::Entities::Entity* projectile2)
+bool cb::Collisions::Projectile_Projectile(cb::Entities::Entity* projectile1,
+                                           cb::Entities::Entity* projectile2)
 {
     return circleCircleInterset(projectile1, projectile2);
 }
 
-bool cb::Collisions::Platform_Player(cb::Entities::Entity* platform, cb::Entities::Entity* player)
+bool cb::Collisions::Platform_Player(cb::Entities::Entity* platform,
+                                     cb::Entities::Entity* player)
 {
     // todo
     return false;
 }
 
-bool cb::Collisions::Platform_Projectile(cb::Entities::Entity* platform, cb::Entities::Entity* projectile)
+bool cb::Collisions::Platform_Projectile(cb::Entities::Entity* platform,
+                                         cb::Entities::Entity* projectile)
 {
     // todo
     return false;
 }
 
-bool cb::Collisions::Player_Platform(cb::Entities::Entity* player, cb::Entities::Entity* platform)
+bool cb::Collisions::Player_Platform(cb::Entities::Entity* player,
+                                     cb::Entities::Entity* platform)
 {
     // todo
     return false;
 }
 
-bool cb::Collisions::Projectile_Platform(cb::Entities::Entity* projectile, cb::Entities::Entity* platform)
+bool cb::Collisions::Projectile_Platform(cb::Entities::Entity* projectile,
+                                         cb::Entities::Entity* platform)
 {
     // todo
     return false;
@@ -104,7 +115,8 @@ bool cb::Collisions::Projectile_Platform(cb::Entities::Entity* projectile, cb::E
 
 // Shape collisions ===============================================================================
 
-bool cb::Collisions::circleCircleInterset(cb::Entities::Entity* ent1, cb::Entities::Entity* ent2)
+bool cb::Collisions::circleCircleInterset(cb::Entities::Entity* ent1,
+                                          cb::Entities::Entity* ent2)
 {
     auto x1 = ent1->getX();
     auto y1 = ent1->getY();
@@ -117,16 +129,19 @@ bool cb::Collisions::circleCircleInterset(cb::Entities::Entity* ent1, cb::Entiti
     return false;
 }
 
-bool cb::Collisions::rectangleCircleIntersect(cb::Entities::Entity* rectangle, cb::Entities::Entity* circle)
+bool cb::Collisions::rectangleCircleIntersect(cb::Entities::Entity* rectangle,
+                                              cb::Entities::Entity* circle)
 {
-    if (circle->getX() > rectangle->getX() + rectangle->getWidth() + circle->getRadius()) {return false;}
-    if (circle->getY() > rectangle->getY() + rectangle->getHeight() + circle->getRadius()) {return false;}
-    if (circle->getX() < rectangle->getX() - circle->getRadius()) {return false;}
-    if (circle->getY() < rectangle->getY() - circle->getRadius()) {return false;}
+    auto& rect = rectangle;
+    if (circle->getX() > rect->getX() + rect->getWidth() + circle->getRadius()) {return false;}
+    if (circle->getY() > rect->getY() + rect->getHeight() + circle->getRadius()) {return false;}
+    if (circle->getX() < rect->getX() - circle->getRadius()) {return false;}
+    if (circle->getY() < rect->getY() - circle->getRadius()) {return false;}
     return true;
 }
 
-bool cb::Collisions::rectangleRectangleIntersect(cb::Entities::Entity* rectangle1, cb::Entities::Entity* rectangle2)
+bool cb::Collisions::rectangleRectangleIntersect(cb::Entities::Entity* rectangle1,
+                                                 cb::Entities::Entity* rectangle2)
 {
     if (rectangle1->getX() + rectangle1->getWidth() < rectangle2->getX()) {return false;}
     if (rectangle1->getX() > rectangle2->getX() + rectangle2->getWidth()) {return false;}
