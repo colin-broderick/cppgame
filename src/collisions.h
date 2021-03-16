@@ -10,6 +10,7 @@
 namespace cb::Collisions
 {
     typedef bool (*CollisionFunction)(cb::Entities::Entity*, cb::Entities::Entity*);
+    void initCollisionMap();
     
     // Entity collisions
     bool Player_Block(cb::Entities::Entity* player, cb::Entities::Entity* block);
@@ -26,9 +27,8 @@ namespace cb::Collisions
     
     // Shape collisions
     bool circleCircleInterset(cb::Entities::Entity* ent1, cb::Entities::Entity* ent2);
-
-    void initCollisionMap();
+    bool rectangleCircleIntersect(cb::Entities::Entity* rectangle, cb::Entities::Entity* circle);
+    bool rectangleRectangleIntersect(cb::Entities::Entity* rectangle1, cb::Entities::Entity* rectangle2);
 }
-
 
 #endif
