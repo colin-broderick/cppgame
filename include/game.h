@@ -20,6 +20,10 @@ namespace cb
             void initText();
             void initScenery();
 
+            void checkForDeletions();
+            void addNewSceneObjects();
+            void updateSceneObjects();
+
             // Timing
             float dt;
             std::chrono::time_point<std::chrono::system_clock> time;
