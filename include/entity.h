@@ -38,6 +38,9 @@ namespace cb::Entities
             virtual float getDy() const;
             virtual bool requestsDeletion() const;
             virtual void reduceHealth(int pain);
+            virtual void setDx(float newValue);
+            virtual void setDy(float newValue);
+            float dx, dy;
     };
 }
 

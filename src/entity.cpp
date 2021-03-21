@@ -75,3 +75,12 @@ void cb::Entities::Entity::reduceHealth(int pain)
 {
     std::cout << "Did you mean to call Entity::reduceHealth?" << std::endl;
 }
+void cb::Entities::Entity::setDx(float newValue)
+{
+    std::cout << "Did you mean to call Entity::setDx?" << std::endl;
+}
+
+void cb::Entities::Entity::setDy(float newValue)
+{
+    std::cout << "Did you mean to call Entity::setDy?" << std::endl;
+}

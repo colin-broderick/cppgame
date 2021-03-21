@@ -49,7 +49,7 @@ namespace cb
             bool m_mouseHeld;
 
             // Game objects
-            std::vector<cb::Entities::Entity*> m_gameObjects;
+            std::vector<cb::Entities::Entity*> m_sceneObjects;
 
         public:
             Game();

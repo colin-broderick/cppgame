@@ -31,10 +31,15 @@ namespace cb::Entities
             float getDy() const;
             bool requestsDeletion() const;
 
+            // Setters
+            void setDx(float newValue);
+            void setDy(float newValue);
+
+            float dx, dy;
 
         private:
             // Properties
-            float x, y, dx, dy, radius, mass, lastX, lastY;
+            float x, y, radius, mass, lastX, lastY;
             int zIndex;
             bool deleteFromScene;
 

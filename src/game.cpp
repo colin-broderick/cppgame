@@ -1,6 +1,7 @@
 #include <iostream>
 #include <map>
 #include <algorithm>
+#include <math.h>
 
 #include "game.h"
 #include "block.h"
@@ -32,7 +33,7 @@ cb::Game::Game()
 /** \brief Create main scene objects like player and blocks. */
 void cb::Game::initScenery()
 {
-    auto &scene = m_gameObjects;
+    auto &scene = m_sceneObjects;
 
     scene.push_back(new cb::Entities::Player{600, 100, 0, 0});
     scene.push_back(new cb::Entities::Block{-10, 1000, 1940, 100});   // floor
@@ -80,11 +81,11 @@ void cb::Game::update()
     CAMERA->setY(PLAYER->getY() - m_window->getSize().y/2 - PLAYER->getVerticalCameraFactor()*160);
 
     // Check for deletions
-    for (unsigned int i = 0; i < m_gameObjects.size(); i++)
+    for (unsigned int i = 0; i < m_sceneObjects.size(); i++)
     {
-        if (m_gameObjects[i]->requestsDeletion())
+        if (m_sceneObjects[i]->requestsDeletion())
         {
-            m_gameObjects.erase(m_gameObjects.begin() + i);
+            m_sceneObjects.erase(m_sceneObjects.begin() + i);
             i--;
         }
     }
@@ -102,33 +103,51 @@ void cb::Game::update()
         m_endGame = true;
     }
 
-    for (unsigned int i = 0; i < m_gameObjects.size(); i++)
+    for (unsigned int i = 0; i < m_sceneObjects.size(); i++)
     {
-        m_gameObjects[i]->update(std::max(dt, 0.02f));
+        m_sceneObjects[i]->update(std::max(dt, 0.02f));
     }
 }
 
 /** \brief Loop over all pairs of objects, check if they collide, and take appropriate action. */
 void cb::Game::detectCollisions()
 {
-    for (unsigned int i = 0; i < m_gameObjects.size(); i++)
+    sf::Vector2f collisionVector;
+    float distance, speed;
+    sf::Vector2f collisionVectorNorm;
+    sf::Vector2f relativeVelocityVector;
+    for (unsigned int i = 0; i < m_sceneObjects.size(); i++)
     {
-        auto el1 = m_gameObjects[i];
-        for (unsigned int j = i+1; j < m_gameObjects.size(); j++)
+        auto& el1 = m_sceneObjects[i];
+        for (unsigned int j = i+1; j < m_sceneObjects.size(); j++)
         {
-            auto el2 = m_gameObjects[j];
+            auto& el2 = m_sceneObjects[j];
             if ((cb::Collisions::collisions[el1->getType()][el2->getType()])(el1, el2))
             {
                 if (el1->getType() == ProjectileType && el2->getType() == ProjectileType)
                 {   
-                    cb::Entities::Projectile el1temp{
-                        el1->getX(),
-                        el1->getY(),
-                        el1->getDx(),
-                        el1->getDy()
-                    };
-                    el1->collide(el2);
-                    el2->collide(&el1temp);
+                    // TODO I'd really rather not have this here.
+                    collisionVector.x = el2->getX() - el1->getX();
+                    collisionVector.y = el2->getY() - el1->getY();
+                    
+                    distance = sqrt(
+                        (el2->getX()-el1->getX())*(el2->getX()-el1->getX())
+                        + (el2->getY()-el1->getY())*(el2->getY()-el1->getY())
+                    );
+                    collisionVectorNorm = collisionVector/distance;
+                    relativeVelocityVector.x = el1->getDx() - el2->getDx();
+                    relativeVelocityVector.y = el1->getDy() - el2->getDy();
+                    
+                    speed = relativeVelocityVector.x*collisionVectorNorm.x
+                                + relativeVelocityVector.y*collisionVectorNorm.y;
+                    // TODO Calculate impulse here.
+                    if (speed > 0)    
+                    {
+                        el1->setDx(el1->getDx() - speed*collisionVectorNorm.x);
+                        el1->setDy(el1->getDy() - speed*collisionVectorNorm.y);
+                        el2->setDx(el2->getDx() + speed*collisionVectorNorm.x);
+                        el2->setDy(el2->getDy() + speed*collisionVectorNorm.y);
+                    }
                 }
                 else
                 {
@@ -177,9 +196,9 @@ void cb::Game::render()
  */
 void cb::Game::renderSceneElements(sf::RenderTarget &target)
 {
-    for (unsigned int i = 0; i < m_gameObjects.size(); i++)
+    for (unsigned int i = 0; i < m_sceneObjects.size(); i++)
     {
-        m_gameObjects[i]->draw(*m_window, *CAMERA);
+        m_sceneObjects[i]->draw(*m_window, *CAMERA);
     }
 }
 

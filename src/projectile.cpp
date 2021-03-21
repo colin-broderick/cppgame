@@ -138,3 +138,16 @@ bool cb::Entities::Projectile::requestsDeletion() const
 {
     return deleteFromScene;
 }
+
+// Setters ========================================================================================
+
+void cb::Entities::Projectile::setDx(float newValue)
+{
+    // std::cout << "Set new dx value" << std::endl;
+    this->dx = newValue;
+}
+
+void cb::Entities::Projectile::setDy(float newValue)
+{
+    this->dy = newValue;
+}
