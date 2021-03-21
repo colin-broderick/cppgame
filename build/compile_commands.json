@@ -1,0 +1,47 @@
+[
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/main.cpp.o -c /home/colin/cppgame/src/main.cpp",
+  "file": "/home/colin/cppgame/src/main.cpp"
+},
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/game.cpp.o -c /home/colin/cppgame/src/game.cpp",
+  "file": "/home/colin/cppgame/src/game.cpp"
+},
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/platform.cpp.o -c /home/colin/cppgame/src/platform.cpp",
+  "file": "/home/colin/cppgame/src/platform.cpp"
+},
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/projectile.cpp.o -c /home/colin/cppgame/src/projectile.cpp",
+  "file": "/home/colin/cppgame/src/projectile.cpp"
+},
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/block.cpp.o -c /home/colin/cppgame/src/block.cpp",
+  "file": "/home/colin/cppgame/src/block.cpp"
+},
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/player.cpp.o -c /home/colin/cppgame/src/player.cpp",
+  "file": "/home/colin/cppgame/src/player.cpp"
+},
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/entity.cpp.o -c /home/colin/cppgame/src/entity.cpp",
+  "file": "/home/colin/cppgame/src/entity.cpp"
+},
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/camera.cpp.o -c /home/colin/cppgame/src/camera.cpp",
+  "file": "/home/colin/cppgame/src/camera.cpp"
+},
+{
+  "directory": "/home/colin/cppgame/build",
+  "command": "/usr/bin/c++   -I/home/colin/cppgame/include  -g   -Wall -g -fpic -std=gnu++17 -o CMakeFiles/game_main.dir/src/collisions.cpp.o -c /home/colin/cppgame/src/collisions.cpp",
+  "file": "/home/colin/cppgame/src/collisions.cpp"
+}
+]

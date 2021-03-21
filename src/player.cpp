@@ -1,4 +1,5 @@
 #include "player.h"
+#include <math.h>
 #include <iostream>
 
 // Constructors ===================================================================================
@@ -175,7 +176,20 @@ void cb::Entities::Player::keyUp(const sf::Event &event)
  */
 void cb::Entities::Player::mouseDown(const sf::Event &event)
 {
-    // TODO Implement.
+    sf::Vector2f direction{
+        m_scene->getMouseX() - (this->x + this->width/2) + m_camera->getX(),
+        m_scene->getMouseY() - (this->y - 50) + m_camera->getY()
+    };
+    float directionNorm = sqrt(direction.x*direction.x+direction.y*direction.y);
+    sf::Vector2f speedVector = direction / directionNorm * 300.0f;
+
+    Entity* newEl = new Projectile{
+        this->x+this->width/2,
+        this->y-50,
+        speedVector.x,
+        speedVector.y
+    };
+    m_scene->addNewObject(newEl);
 }
 
 /** \brief Update the state of the player in each frame.
@@ -309,4 +323,14 @@ EntityTypes cb::Entities::Player::getType() const
 void cb::Entities::Player::reduceHealth(int pain)
 {
     health -= pain;
+}
+
+void cb::Entities::Player::setScene(cb::Game* scene)
+{
+    m_scene = scene;
+}
+
+void cb::Entities::Player::setCamera(cb::Entities::Camera* camera)
+{
+    m_camera = camera;
 }

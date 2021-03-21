@@ -8,9 +8,16 @@
 #include "entity.h"
 #include "block.h"
 #include "projectile.h"
+#include "game.h"
+
+// namespace cb
+// {
+//     class Game;
+// }
 
 namespace cb::Entities
 {
+    
     class Player : public Entity
     {
         public:
@@ -30,9 +37,9 @@ namespace cb::Entities
             void stopLeft();
             void stopRight();
             void meleeAttack();
-            void keyDown(const sf::Event &event);
-            void keyUp(const sf::Event &event);
-            void mouseDown(const sf::Event &event);
+            void keyDown(const sf::Event& event);
+            void keyUp(const sf::Event& event);
+            void mouseDown(const sf::Event& event);
             void update(float dt);
 
             // Collision managers
@@ -51,11 +58,16 @@ namespace cb::Entities
             EntityTypes getType() const;
 
             // Setters
+            void setScene(cb::Game* scene);
+            void setCamera(cb::Entities::Camera* camera);
             void reduceHealth(int pain);
 
         private:
             // Graphics
             sf::RectangleShape representation;
+
+            cb::Game* m_scene;
+            cb::Entities::Camera* m_camera;
 
             // Properties
             float x, y, width, height, lastX, lastY;

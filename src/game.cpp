@@ -30,6 +30,21 @@ cb::Game::Game()
     lastTime = std::chrono::system_clock::now();
 }
 
+sf::Vector2f cb::Game::getMouse() const
+{
+    return m_mouseView;
+}
+
+float cb::Game::getMouseX() const
+{
+    return m_mouseView.x;
+}
+
+float cb::Game::getMouseY() const
+{
+    return m_mouseView.y;
+}
+
 /** \brief Create main scene objects like player and blocks. */
 void cb::Game::initScenery()
 {
@@ -56,6 +71,8 @@ void cb::Game::initScenery()
         0,
         -10, 1940, -200, 1100
     };
+    PLAYER->setScene(this);
+    PLAYER->setCamera(CAMERA);
 }
 
 /** \brief Destructor for game object. */
@@ -90,23 +107,39 @@ void cb::Game::update()
         }
     }
 
+    // Add new scene objects.
+    for (unsigned int i = 0; i < m_newSceneObjects.size(); i++)
+    {
+        // std::cout << "Added element to scene" << std::endl;
+        m_sceneObjects.push_back(m_newSceneObjects[i]);
+    }
+    m_newSceneObjects.clear();
+
+    // Check for input events.
     pollEvents();
 
+    // Check for end game condition.
     if (!m_endGame)
     {
         updateMouse();
         updateText();
     }
-
     if (m_health <= 0)
     {
         m_endGame = true;
     }
 
+    // Update states of scene objects.
     for (unsigned int i = 0; i < m_sceneObjects.size(); i++)
     {
         m_sceneObjects[i]->update(std::max(dt, 0.02f));
     }
+}
+
+
+void cb::Game::addNewObject(cb::Entities::Entity* newElement)
+{
+    m_newSceneObjects.push_back(newElement);
 }
 
 /** \brief Loop over all pairs of objects, check if they collide, and take appropriate action. */
@@ -218,6 +251,9 @@ void cb::Game::pollEvents()
                 break;
             case sf::Event::KeyReleased:
                 PLAYER->keyUp(m_event);
+                break;
+            case sf::Event::MouseButtonPressed:
+                PLAYER->mouseDown(m_event);
                 break;
             case sf::Event::Closed:
                 m_window->close();

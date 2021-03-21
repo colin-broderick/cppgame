@@ -6,9 +6,7 @@
 #include <sstream>
 #include <chrono>
 
-#include "player.h"
 #include "entity.h"
-#include "block.h"
 
 namespace cb
 {
@@ -50,6 +48,7 @@ namespace cb
 
             // Game objects
             std::vector<cb::Entities::Entity*> m_sceneObjects;
+            std::vector<cb::Entities::Entity*> m_newSceneObjects;
 
         public:
             Game();
@@ -62,11 +61,16 @@ namespace cb
             void renderText(sf::RenderTarget &target);
             void renderSceneElements(sf::RenderTarget &target);
 
+            void addNewObject(cb::Entities::Entity* newElement);
+
             void pollEvents();
             void updateMouse();
             void update();
             void detectCollisions();
             void render();
+            sf::Vector2f getMouse() const;
+            float getMouseX() const;
+            float getMouseY() const;
     };
 }
 
